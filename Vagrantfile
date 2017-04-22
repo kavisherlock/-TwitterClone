@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
     config.vm.network "private_network", ip: "192.168.33.10"
     config.vm.hostname = "scotchbox"
     config.vm.synced_folder ".", "/home/vagrant/-TwitterClone", nfs: true
-    config.vm.network "forwarded_port", guest: 3000, host: 3000    
+    config.vm.network "forwarded_port", guest: 3000, host: 3001    
 
     # Optional NFS. Make sure to remove other synced_folder line too
     #config.vm.synced_folder ".", "/var/www", :nfs => { :mount_options => ["dmode=777","fmode=666"] }
