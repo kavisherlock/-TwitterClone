@@ -9,11 +9,11 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 # Use sqlite3 as the database for Active Record
-group :production do    
-    gem 'pg'  
-end  
-group :development do  
-    gem 'sqlite3' 
+group :production do
+  gem 'pg'
+end
+group :development, :test do
+  gem 'sqlite3'
 end
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -35,7 +35,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.11'
+
+gem 'bootstrap-sass'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -52,3 +54,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'rails_12factor', group: :production

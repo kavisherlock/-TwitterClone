@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+@import "variables";
+@import "components/header";
+
+@import "sessions";
+@import "users";
+@import "tweets";
+
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  font-size: 1.2em;
+  padding-top: $gutter-px * 7;
+  margin-bottom: $gutter-px * 6;
+}
