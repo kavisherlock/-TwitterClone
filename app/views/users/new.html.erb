@@ -1,5 +1,16 @@
-<h1>Welcome To KavishTwitter</h1>
 
-<%= render 'form', user: @user %>
+<div class="container">
 
-<%= link_to 'Back', users_path %>
+  <div class="row">
+    <h1>Welcome To KavishTwitter</h1>
+
+    <%= render 'form', user: @user %>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <%= link_to 'Back', users_path, class: "btn btn-warning" %>
+  </div>
+
+</div>
