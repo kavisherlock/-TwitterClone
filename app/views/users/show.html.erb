@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <% if current_user.id == @user.id %>
+    <% if nil != current_user && current_user.id == @user.id %>
       <h1>My Profile</h1>
     <% else %>
       <h1>User Profile</h1>
@@ -22,7 +22,12 @@
   <br>
 
   <div class="row">
-    <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-success" %> |
+    <% if nil != current_user && (current_user.admin? || current_user?(@user))%>
+      <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-success" %> |
+    <% end %>
+    <% if nil != current_user && (current_user.admin?)%>
+    <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> |
+    <% end %>
     <%= link_to 'Back', users_path, class: "btn btn-info" %>
   </div>
 

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
-  has_many :tweets
+  has_many :tweets, dependent: :destroy
 
   before_save {self.email = email.downcase}
 
