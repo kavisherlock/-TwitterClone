@@ -21,8 +21,8 @@
 @import "components/header";
 
 @import "sessions";
-@import "users";
 @import "tweets";
+@import "users";
 
 
 html {
@@ -31,7 +31,11 @@ html {
 }
 
 body {
-  font-size: 1.2em;
-  padding-top: $gutter-px * 7;
-  margin-bottom: $gutter-px * 6;
+  font-size: 1.5em;
+  padding: $gutter-px * 7;
+  background-color: #dddddd;
+}
+
+.container {
+ background-color: white;
 }

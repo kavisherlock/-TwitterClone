@@ -1,59 +1,57 @@
 <p id="notice"><%= notice %></p>
 
-<div class="container">
-  <div class="row">
-    <h1>Users</h1>
-  </div>
+<div class="row">
+  <h1>Users</h1>
+</div>
 
-  <%= will_paginate @users %>
+<%= will_paginate @users %>
 
-  <div class="row">
-    <div class="table-striped">
-      <table class="table">
-        <thead>
+<div class="row">
+  <div class="table-striped">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if nil != current_user %>
           <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th colspan="3"></th>
+            <td><%= current_user.name %></td>
+            <td><%= current_user.email %></td>
+            <td>
+              <%= link_to 'My Profile', current_user, class: "btn-sm btn-success" %>
+              <%= link_to 'Edit Profile', edit_user_path(current_user), class: "btn-sm btn-info"  %>
+              <% if current_user.admin? %>
+                <%= link_to 'Delete User', current_user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger" %></td>
+              <% end %>
           </tr>
-        </thead>
-
-        <tbody>
-          <% if nil != current_user %>
+        <% end %>
+        <% @users.each do |user| %>
+          <% if nil != current_user && !current_user?(user) %>
             <tr>
-              <td><%= current_user.name %></td>
-              <td><%= current_user.email %></td>
+              <td><%= user.name %></td>
+              <td><%= user.email %></td>
               <td>
-                <%= link_to 'My Profile', current_user, class: "btn-sm btn-success" %>
-                <%= link_to 'Edit Profile', edit_user_path(current_user), class: "btn-sm btn-info"  %>
+                <%= link_to 'View Profile', user, class: "btn-sm btn-success" %>
                 <% if current_user.admin? %>
-                  <%= link_to 'Delete User', current_user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger" %></td>
+                  <%= link_to 'Edit User', edit_user_path(user), class: "btn-sm btn-info"  %>
+                  <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger" %>
                 <% end %>
+              </td>
             </tr>
           <% end %>
-          <% @users.each do |user| %>
-            <% if nil != current_user && !current_user?(user) %>
-              <tr>
-                <td><%= user.name %></td>
-                <td><%= user.email %></td>
-                <td>
-                  <%= link_to 'View Profile', user, class: "btn-sm btn-success" %>
-                  <% if current_user.admin? %>
-                    <%= link_to 'Edit User', edit_user_path(user), class: "btn-sm btn-info"  %>
-                    <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger" %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
+</div>
 
-  <%= will_paginate %>
+<%= will_paginate %>
 
-  <div class="row">
-      <%= link_to 'New User', new_user_path, class: "btn btn-info users-buttons" %>
-  </div>
+<div class="row">
+    <%= link_to 'New User', new_user_path, class: "btn btn-info users-buttons" %>
 </div>

@@ -1,13 +1,66 @@
 <p id="notice"><%= notice %></p>
 
-<% provide(:title, "Log in") %>
+<% provide(:title, "Home") %>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-8 col-md-offset-2">
+<div class="row">
+  <% if logged_in? %>
+    <aside class="col-md-4">
+      <h2><%= current_user.name %></h2>
+      <p><%= link_to "My Profile", current_user, class: "btn btn-primary" %></p>
+      <span><%= pluralize(current_user.tweets.count, "tweet") %></span>
+      <%= bootstrap_form_for(@tweet, html: { multipart: true }) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="field">
+          <%= f.text_area :content, placeholder: "Compose new tweet..." %>
+        </div>
+        <%= f.submit "Post", class: "btn btn-primary" %>
+        <span class="picture">
+          <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+        </span>
+      <% end %>
+
+      <script type="text/javascript">
+        $('#tweet_picture').bind('change', function() {
+          size_in_megabytes = this.files[0].size/1024/1024;
+          if (size_in_megabytes > 5) {
+            alert('Maximum file size is 5MB. Please choose a smaller file.');
+          }
+        });
+      </script>
+    </aside>
+    <aside class="col-md-8 tweets-table">
+      <% if @feed_items.any? %>
+        <h3>Feed</h3>
+        <table class="tweets table-hover">
+          <tbody>
+            <% @feed_items.each do |tweet| %>
+              <tr>
+                <td class="content">
+                  <%= tweet.content %>
+                  <br>
+                  <%= image_tag tweet.picture.url if tweet.picture? %>
+                </td>
+                <td class="timestamp">
+                  Posted <%= time_ago_in_words(tweet.created_at) %> ago.
+                  <p>
+                    <% if nil != current_user && (current_user.admin? || current_user?(@user))%>
+                      <%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-xs btn-danger delete-tweet-btn" %>
+                    <% end %>
+                  </p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= will_paginate @feed_items %>
+      <% end %>
+    </aside>
+  <% else %>
+    <div class="col-md-8">
       <h1>Log in</h1>
 
       <%= bootstrap_form_for(:session, url: login_path) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
         <%= f.email_field :email, class: 'form-control' %>
         <%= f.password_field :password, class: 'form-control' %>
         <%= f.check_box :remember_me %>
@@ -15,6 +68,6 @@
       <% end %>
       <br>
       <%= link_to "Sign up now!", signup_path, class: "btn btn-info" %>
+    <% end %>
     </div>
-  </div>
 </div>

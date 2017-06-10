@@ -5,3 +5,22 @@
 .users-buttons {
   color: white;
 }
+
+td.content {
+	padding: 1em;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #E6E6FA;
+}
+
+.tweets-table {
+ border-radius: 35px;
+ background-color: #f3f3f3;
+ width: 65%;
+ border: 1px black solid;
+}
+
+.delete-tweet-btn {
+  float: right;
+}

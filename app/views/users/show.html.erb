@@ -1,5 +1,9 @@
-<div class="container">
-  <div class="row">
+<p id="notice"><%= notice %></p>
+
+<% provide(:title, "My Profile") %>
+
+<div class="row">
+  <div class="col-md-4">
     <% if nil != current_user && current_user.id == @user.id %>
       <h1>My Profile</h1>
     <% else %>
@@ -17,18 +21,45 @@
       <strong>Email:</strong>
       <%= @user.email %>
     </p>
+    <br>
+    <p>
+      <% if nil != current_user && (current_user.admin? || current_user?(@user))%>
+        <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-success" %> 
+      <% end %>
+      <% if nil != current_user && (current_user.admin?)%>
+        <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+      <% end %>
+    </p>
+
+    <p>
+      <%= link_to 'Back to All Users', users_path, class: "btn btn-info" %>
+    </p>
   </div>
-
-  <br>
-
-  <div class="row">
-    <% if nil != current_user && (current_user.admin? || current_user?(@user))%>
-      <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-success" %> |
+  <div class="col-md-8 tweets-table">
+    <% if @user.tweets.any? %>
+      <h3>Tweets (<%= @user.tweets.count %>)</h3>
+      <table class="tweets table-hover table-info">
+        <tbody>
+          <% @tweets.each do |tweet| %>
+            <tr>
+              <td class="content">
+                <%= tweet.content %>
+                <br>
+                <%= image_tag tweet.picture.url if tweet.picture? %>
+              </td>
+              <td class="timestamp">
+                Posted <%= time_ago_in_words(tweet.created_at) %> ago.
+                <p>
+                  <% if nil != current_user && (current_user.admin? || current_user?(@user))%>
+                    <%= link_to 'Delete', tweet, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-xs btn-danger delete-tweet-btn" %>
+                  <% end %>
+                </p>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @tweets %>
     <% end %>
-    <% if nil != current_user && (current_user.admin?)%>
-    <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %> |
-    <% end %>
-    <%= link_to 'Back', users_path, class: "btn btn-info" %>
   </div>
-
 </div>
