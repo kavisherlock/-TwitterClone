@@ -1,0 +1,29 @@
+<div class="col-sm-4 user-profile-block">
+  <h1><%= @user.name %></h1>
+
+  <section class="stats">
+    <%= render 'shared/stats' %>
+  </section>
+
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
+
+  <p>
+    <strong>Handle:</strong>
+    <%= @user.handle %>
+  </p>
+
+  <%= render 'follow_form' if logged_in? %>
+
+  <br>
+  <p>
+    <% if nil != current_user && (current_user.admin? || current_user?(@user))%>
+      <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-success" %> 
+    <% end %>
+    <% if nil != current_user && (current_user.admin?)%>
+      <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    <% end %>
+  </p>
+</div>

@@ -6,7 +6,12 @@
   <% if logged_in? %>
     <aside class="col-sm-4 user-home-block">
       <h2><%= current_user.name %></h2>
-      <p><%= link_to "My Profile", current_user, class: "btn btn-primary" %></p>
+      <p>
+        <section class="stats">
+          <%= render 'shared/stats' %>
+        </section>
+        <%= link_to "My Profile", current_user, class: "btn btn-primary" %>
+      </p>
       <%= bootstrap_form_for(@tweet, html: { multipart: true }) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
         <%= f.text_area :content, placeholder: "Compose new tweet..." %>

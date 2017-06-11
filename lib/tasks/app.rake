@@ -10,7 +10,7 @@ namespace :app do
   desc 'Starts the application server and binds to ip 0.0.0.0'
   task :serve do
     if Rails.env.development?
-      exec('rails s -b 0.0.0.0')
+      exec('rails s -b 0.0.0.0 -p 4000')
     end
   end
 end
