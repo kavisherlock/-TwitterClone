@@ -21,8 +21,8 @@
 @import "components/header";
 
 @import "sessions";
-@import "users";
 @import "tweets";
+@import "users";
 
 
 html {
@@ -31,7 +31,28 @@ html {
 }
 
 body {
-  font-size: 1.2em;
-  padding-top: $gutter-px * 7;
-  margin-bottom: $gutter-px * 6;
+	font: $normal-text;
+  font-size: -1.5 * $gutter-em;
+  padding: $gutter-px * 5;
+  background: $theme-color;
+}
+
+#logo {
+  background: $theme-color;	
+  color: $logo-color;
+}
+
+#logo:hover {
+	text-decoration: none;
+	color: $secondary-color;
+}
+
+.nav {
+	padding-right: $gutter-em;
+}
+
+.tweets {
+  background: $background-color;
+  border-radius: 10px;
+  border: thin $border-color solid;
 }

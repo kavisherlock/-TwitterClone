@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    if logged_in?
+      @tweet = current_user.tweets.build
+      @feed_items = current_user.feed.paginate(page: params[:page])
+    end
   end
 
   def create
@@ -8,10 +12,10 @@ class SessionsController < ApplicationController
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       flash[:success] = 'Welcome ' + user.name + "!!"
-      redirect_to user
+      redirect_back_or user
     else
       flash[:danger] = 'Invalid email/password combination'
-      render 'new'
+      render 'new', notice: 'Invalid email/password combination'
     end
   end
 

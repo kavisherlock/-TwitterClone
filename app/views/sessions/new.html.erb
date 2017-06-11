@@ -1,24 +1,50 @@
-<% provide(:title, "Log in") %>
-<h1>Log in</h1>
+<p id="notice"><%= notice %></p>
+
+<% provide(:title, "Home") %>
 
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(:session, url: login_path) do |f| %>
-
-      <%= f.label :email%>
-      <%= f.email_field :email, class: 'form-control' %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-
-      <%= f.label :remember_me, class: "checkbox inline" do %>
-        <%= f.check_box :remember_me %>
-        <span>Remember me on this computer</span>
+  <% if logged_in? %>
+    <aside class="col-sm-4 user-home-block">
+      <h2><%= current_user.name %></h2>
+      <p><%= link_to "My Profile", current_user, class: "btn btn-primary" %></p>
+      <%= bootstrap_form_for(@tweet, html: { multipart: true }) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.text_area :content, placeholder: "Compose new tweet..." %>
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+        <%= f.submit "Post", class: "btn btn-primary" %>
       <% end %>
 
-      <%= f.submit "Log in", class: "btn btn-primary" %>
-    <% end %>
+      <script type="text/javascript">
+        $('#tweet_picture').bind('change', function() {
+          size_in_megabytes = this.files[0].size/1024/1024;
+          if (size_in_megabytes > 5) {
+            alert('Maximum file size is 5MB. Please choose a smaller file.');
+          }
+        });
+      </script>
+    </aside>
+    <aside class="col-sm-7 tweets">
+      <% if @feed_items.any? %>
+        <h3>Tweet Feed</h3>
+        <ol class="feed-list">
+          <%= render @feed_items %>
+        </ol>
+        <%= will_paginate @feed_items %>
+      <% end %>
+    </aside>
+  <% else %>
+    <div class="col-sm-11 user-home-block">
+      <h1>Log in</h1>
 
-    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
-  </div>
+      <%= bootstrap_form_for(:session, url: login_path) do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <%= f.email_field :email, class: 'form-control' %>
+        <%= f.password_field :password, class: 'form-control' %>
+        <%= f.check_box :remember_me %>
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+      <% end %>
+      <br>
+      <%= link_to "Not a member yet? Sign up now!", signup_path, class: "btn btn-info" %>
+    <% end %>
+    </div>
 </div>

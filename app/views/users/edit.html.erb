@@ -1,6 +1,7 @@
-<h1>Editing User</h1>
+<div class="row edit-user-block">
+  <h1>Editing User</h1>
 
-<%= render 'form', user: @user %>
-
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+  <%= render 'form', user: @user %>
+  <br>
+  <%= link_to 'Back', @user, class: "btn btn-info"  %>
+</div>

@@ -1,3 +1,30 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.users-buttons {
+  color: white;
+}
+
+.user-profile-block {
+  background: $background-color;
+  border-radius: $gutter-px;
+  border: thin $border-color solid;
+  margin-right: $gutter-em;
+  padding-bottom: $gutter-em;
+}
+
+.tweets-list {
+	list-style-type:none;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.buttons {
+	text-align: right;
+}
+
+.edit-user-block {
+	background: $background-color;
+  border-radius: $gutter-px;
+  border: thin $border-color solid;
+  padding: $gutter-em;
+}

@@ -1,3 +1,35 @@
-// Place all the styles related to the Tweets controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+
+.tweet-list-item {
+	padding: 15px;
+	border-bottom: 1px $border-color solid;
+
+	.user-item:hover {
+		text-decoration: none;
+		color: $secondary-color;
+	}
+
+	.timestamp {
+		text-align: right;
+		color: $logo-color;
+		font-size: $gutter-px;
+		margin-bottom: $gutter-px;
+
+		.btn-xs {
+			background: $background-color;
+			border: $border-color;
+			color: $errors;
+			font-size: $gutter-px;
+		}
+		
+		.btn-xs:hover{
+			text-decoration: none;
+			color: $background-color;
+			background: $errors;
+		}
+	}
+}
+
+.tweet-list-item:hover {
+	background: $theme-color;
+}
