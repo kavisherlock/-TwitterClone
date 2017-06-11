@@ -1,0 +1,22 @@
+<tr>
+  <td><%= user.name %></td>
+  <td><%= user.email %></td>
+  <td><%= user.handle %></td>
+
+  <% if nil != current_user && current_user?(user) %>
+    <td class="buttons">
+        <%= link_to 'My Profile', current_user, class: "btn-sm btn-success" %>
+        <%= link_to 'Edit Profile', edit_user_path(current_user), class: "btn-sm btn-info"  %>
+        <% if current_user.admin? %>
+          <%= link_to 'Delete User', current_user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger" %></td>
+        <% end %>
+  <% else %>
+    <td class="buttons">
+      <%= link_to 'View Profile', user, class: "btn-sm btn-success" %>
+      <% if current_user.admin? %>
+        <%= link_to 'Edit User', edit_user_path(user), class: "btn-sm btn-info"  %>
+        <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn-sm btn-danger" %>
+      <% end %>
+    </td>
+  <% end %>
+</tr>

@@ -3,43 +3,8 @@
 <% provide(:title, "My Profile") %>
 
 <div class="row">
-  <div class="col-sm-3 user-profile-block">
-    <% if nil != current_user && current_user.id == @user.id %>
-      <h1>My Profile</h1>
-    <% else %>
-      <h1>User Profile</h1>
-    <% end %>
-
-    <p>
-      <strong>Name:</strong>
-      <%= @user.name %>
-    </p>
-
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
-
-    <p>
-      <strong>Handle:</strong>
-      <%= @user.handle %>
-    </p>
-
-    <br>
-    <p>
-      <% if nil != current_user && (current_user.admin? || current_user?(@user))%>
-        <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-success" %> 
-      <% end %>
-      <% if nil != current_user && (current_user.admin?)%>
-        <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
-      <% end %>
-    </p>
-
-    <p>
-      <%= link_to 'Back to All Users', users_path, class: "btn btn-info" %>
-    </p>
-  </div>
-  <div class="col-sm-8 tweets">
+  <%= render 'user_info' %>
+  <div class="col-sm-7 tweets">
     <% if @user.tweets.any? %>
       <h3>Tweets (<%= @user.tweets.count %>)</h3>
       <ol class="tweets-list">

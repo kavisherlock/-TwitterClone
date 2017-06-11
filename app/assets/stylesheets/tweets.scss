@@ -28,8 +28,8 @@
 			background: $errors;
 		}
 	}
-}
 
-.tweet-list-item:hover {
-	background: $theme-color;
+	&:hover {
+		background: $theme-color;
+	}
 }

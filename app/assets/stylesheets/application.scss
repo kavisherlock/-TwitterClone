@@ -40,11 +40,10 @@ body {
 #logo {
   background: $theme-color;	
   color: $logo-color;
-}
-
-#logo:hover {
-	text-decoration: none;
-	color: $secondary-color;
+  &:hover {
+    text-decoration: none;
+    color: $secondary-color;
+  }
 }
 
 .nav {

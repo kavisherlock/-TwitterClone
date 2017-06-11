@@ -1,0 +1,23 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <%= render 'user_info' %>
+  <div class="col-sm-7 tweets">
+    <h3><%= @title %></h3>
+    <% if @users.any? %>
+      <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Handle</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @users %>
+      </tbody>
+    </table>
+    <%= will_paginate %>
+    <% end %>
+  </div>
+</div>
