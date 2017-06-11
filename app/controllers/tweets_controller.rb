@@ -9,10 +9,10 @@ class TweetsController < ApplicationController
     @tweet = current_user.tweets.build(tweet_params)
     if @tweet.save
       flash[:success] = "Tweet created!"
-      redirect_to current_user
     else
-      redirect_to root_url
+      flash[:error] = "Failed to create tweet."
     end
+    redirect_to root_url
   end
 
   # DELETE /tweets/1
@@ -20,7 +20,7 @@ class TweetsController < ApplicationController
   def destroy
     @tweet.destroy
     flash[:success] = "Tweet deleted"
-    redirect_to request.referrer || root_url, notice: 'Tweet was successfully destroyed.'
+    redirect_to request.referrer || root_url, notice: 'Tweet was successfully deleted.'
   end
 
   private

@@ -1,26 +1,30 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
 
 .users-buttons {
   color: white;
 }
 
-td.content {
-	padding: 1em;
+.user-profile-block {
+  background: $background-color;
+  border-radius: $gutter-px;
+  border: thin $border-color solid;
+  margin-right: $gutter-em;
+  padding-bottom: $gutter-em;
 }
 
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-  background-color: #E6E6FA;
+.tweets-list {
+	list-style-type:none;
+	margin-left: 0;
+	padding-left: 0;
 }
 
-.tweets-table {
- border-radius: 35px;
- background-color: #f3f3f3;
- width: 65%;
- border: 1px black solid;
+.buttons {
+	text-align: right;
 }
 
-.delete-tweet-btn {
-  float: right;
+.edit-user-block {
+	background: $background-color;
+  border-radius: $gutter-px;
+  border: thin $border-color solid;
+  padding: $gutter-em;
 }

@@ -1,0 +1,15 @@
+<a href="#">
+  <li id="tweet-<%= tweet.id %>" class="tweet-list-item">
+    <div class="user"><strong><%= link_to tweet.user.name, tweet.user, class: "user-item"%></strong></div>
+    <div class="content">
+      <%= tweet.content %>
+    </div>
+    <%= image_tag tweet.picture.url if tweet.picture? %>
+    <div class="timestamp">
+      Posted <%= time_ago_in_words(tweet.created_at) %> ago.
+      <% if current_user?(tweet.user) or current_user.admin? %>
+        <%= link_to "Delete", tweet, method: :delete, data: { confirm: "You sure?" }, class: "btn-xs" %>
+      <% end %>
+    </div>
+  </li>
+</a>
