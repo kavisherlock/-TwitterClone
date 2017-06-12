@@ -7,21 +7,25 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.create!(name:  "Kavish R Munjal",
              email: "kavish@twitter.org",
-             handle: "kavishrm",
-             password:              "kavish",
+             handle: "kavisherlock",
+             password: "kavish",
              password_confirmation: "kavish",
-             admin: true)
+             admin: true,
+             activated: true,
+             activated_at: Time.zone.now)
 
-99.times do |n|
+49.times do |n|
   name  = Faker::Name.name
-  email = "Claire-#{n+1}@twitter.org"
-  handle = "Claire-#{n+1}"
+  email = "user-#{n+1}@twitter.org"
+  handle = "user-#{n+1}"
   password = "kavish"
   User.create!(name:  name,
                email: email,
                handle: handle,
-               password:              password,
-               password_confirmation: password)
+               password: password,
+               password_confirmation: password,
+               activated: true,
+               activated_at: Time.zone.now)
 end
 
 # Following relationships
@@ -33,7 +37,7 @@ following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 
 users_tweet = User.order(:created_at).take(6)
-5.times do
+25.times do
  content = Faker::Lorem.sentence(rand(2..10)).chomp('.')
  users_tweet.each { |user| user.tweets.create!(content: content) }
 
